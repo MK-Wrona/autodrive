@@ -5,7 +5,8 @@ export default createStore({
     city_id: 1,
     MscId: 1,
     SaintId: 2,
-    isMsc: true
+    isMsc: true,
+    reqValid: true
 
 
   },

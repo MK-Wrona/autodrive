@@ -36,6 +36,7 @@ export default {
       this.modalVisible = true;
       
     },
+  
     setId(){
       if (this.id = 1) 
       { 

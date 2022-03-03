@@ -1,10 +1,18 @@
 <template >
+<div>
+<div class="absolute opacity-50 z-15 bg-neutral-500 w-full h-full" v-if="shown">
+  <div class=" w-1/2 h-1/2  fixed inset-1/4 flex flex-col items-center justify-center bg-neutral-800 opacity-100"> 
+  <h2 class="font-mono text-center text-green-500 text-4xl">{{$store.state.reqValid ? 'Победа' : 'Не очень победа'}}</h2>
+  
+  </div>
+</div>
 <div class="absolute opacity-100 z-15" v-if="show">
   <div class="w-1/2 h-1/2  fixed inset-1/4 flex flex-col items-center justify-center">
   <div class="absolute w-8 h-8 ease-in transition-opacity  delay-75 hover:bg-teal-400 focus:outline-none focus:ring focus:ring-violet-300 top-0 right-0 cursor-pointer">
 
 <img :src="require(`./Group.svg`)" class=" absolute top-0 right-0" @click="hideModal">
   </div>
+  
    <form @submit.prevent="makeOrder" required class="w-full h-full bg-gray-500 flex flex-col justify-center items-center z-15 opacity-100">
     
         <select class="cursor-pointer">
@@ -14,12 +22,15 @@
         <label class="w-1/2 bg-grey-500 text-red-500 z-15"><input v-model="form.name"  minlength="3" maxlength="12" placeholder="Имя" class="w-full bg-grey-500 rounded-md my-1.5 py-1.5 z-15"></label>
         <label class="w-1/2 bg-grey-500 text-red-500 z-15"><input v-model="form.phone"  placeholder="Телефон" class="w-full rounded-md my-1.5 py-1.5 z-15"></label>
         <label class="w-1/2 bg-grey-500 text-red-500 z-15"><input v-model="form.email"  type="email" placeholder="E-mail" class="w-full rounded-md my-1.5 py-1.5 z-15"></label>
-        <button type="submit" class="inset-2/3 bg-slate-100 py-1.5 pm-1.5 rounded-md hover:bg-teal-400 focus:outline-none delay-75 focus:ring focus:ring-violet-300 top-0 right-0 cursor-pointer">Отправить</button>
+        <button @click="showModalResponse" type="submit" class="inset-2/3 bg-slate-100 py-1.5 pm-1.5 rounded-md hover:bg-teal-400 focus:outline-none delay-75 focus:ring focus:ring-violet-300 top-0 right-0 cursor-pointer">Отправить</button>
         
     
     </form>   
+    
   </div>
-  </div>
+
+</div>
+</div>
 </template>
 
 <script>
@@ -33,14 +44,16 @@ export default {
         phone: "",
         email: "",
         city_id: 0
-      }
+      },
+      shown: false,
     }
   },
   props: {
     show: {
       type: Boolean,
       default: false,
-    }
+    },
+    
   },
   methods: {
     hideModal(){
@@ -60,11 +73,25 @@ export default {
         this.cityId = 2
         };
     },
+    showModalResponse(){
+      this.shown = true;
+      setTimeout(() => {
+        this.shown = false;
+      }, 1000);
+
+    },
+    
     makeOrder(){
       this.form.city_id = this.$store.state.city_id
       axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', this.form)
       .then(response => (this.data = response.data.id))
-      .catch(error => (this.error = err))
+      .then(this.$store.state.reqValid = true)
+      
+      
+      .catch(error => (this.error = error),
+            this.$store.state.reqValid = false
+            // словить код ошибки с сервака и отдать в модалку
+      )
         
 
     
