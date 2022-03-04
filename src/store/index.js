@@ -6,7 +6,10 @@ export default createStore({
     MscId: 1,
     SaintId: 2,
     isMsc: true,
-    reqValid: true
+    reqValid: true,
+    isNameInvalid:false,
+    isPhoneInvalid:false,
+    isEmailInvalid:false,
 
 
   },
