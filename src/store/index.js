@@ -3,13 +3,13 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     city_id: 1,
-    MscId: 1,
-    SaintId: 2,
     isMsc: true,
     reqValid: true,
     isNameInvalid:false,
     isPhoneInvalid:false,
     isEmailInvalid:false,
+    isFormInvalid:false,
+    isOpened: false,
 
 
   },
@@ -37,6 +37,12 @@ export default createStore({
     },
     setSaintId(state){
       state.city_id = 2
+    },
+    closeResponse(state){
+      state.isOpened = false
+    },
+    openResponse(state){
+      state.isOpened = true
     }
   },
   actions: {
