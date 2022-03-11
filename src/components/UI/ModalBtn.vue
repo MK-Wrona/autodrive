@@ -1,7 +1,10 @@
 <template>
-  <div class="md:text-base text-2xl bg-zinc-500 h-1/4 max-h-fit md:w-2/6 w-60 min-w-max rounded-md font-mono text-center flex items-center justify-center">
-      <button class="bg-slate-100 h-2/6 w-2/6 rounded-md hover:bg-teal-400"><slot></slot></button>
-  </div>
+  
+      <button class="font-inter text-white text-base font-medium 
+      w-80 h-10 
+      sm:first:w-44 sm:last:w-64 sm:first:mr-4 sm:first:mr-4
+      first:bg-blue-500 mb-2.5 last:bg-teal-500 rounded-md hover:opacity-80"><slot></slot></button>
+  
 </template>
 
 <script>

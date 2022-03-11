@@ -1,31 +1,35 @@
 <template >
-<div>
-<div class="absolute opacity-50 z-15 bg-neutral-500 w-full h-full" v-if="$store.state.isOpened">
+<div class="absolute opacity-50 z-10 bg-neutral-500" v-if="$store.state.isOpened">
   
   <div class=" w-1/2 h-1/2  fixed inset-1/4 flex flex-col items-center justify-center bg-neutral-800 opacity-100"> 
   <h2 class="font-mono text-center text-teal-400 text-6xl">{{$store.state.reqValid ? 'Данные записаны.' : 'Что-то пошло не так :с'}}</h2>
   </div>
 </div>
-<div class="absolute opacity-100 z-15" v-if="show">
-  <div class="w-1/2 h-1/2  fixed inset-1/4 flex flex-col items-center justify-center border-8 border-neutral-200 rounded-lg">
-  <div class="absolute w-8 h-8 ease-in transition-opacity  delay-75 hover:bg-teal-400 focus:outline-none focus:ring focus:ring-violet-300 top-0 right-0 cursor-pointer">
+
+<div class="fixed inset-0 bg-slate-500 opacity-75 flex flex-col items-center justify-center" v-if="show">
+  <div class="w-80   opacity-100 z-1 rounded-lg" >
+  
 
 <img :src="require(`./Group.svg`)" class=" absolute top-0 right-0" @click="hideModal">
-  </div>
   
-   <form @submit.prevent="makeOrder"  id="form" required  novalidate class="w-full h-full bg-gray-500 flex flex-col justify-center items-center z-15 opacity-100">
-    
-        <select  @change="changeSelect" class="cursor-pointer md:w-40 w-25 md:text-base text-xs">
-            <option id="1option" class="1option md:w-40 w-20 text-xs" ref="option1">{{$store.state.isMsc ? "Москва" : "Питер"}}</option>
+  
+   <form @submit.prevent="makeOrder"  id="form" required  novalidate class="w-80 h-auto bg-white flex flex-col  rounded-lg opacity-100 px-6 py-6">
+        <p class="font-inter text-xl font-medium text-black mb-9 leading-6">Заказать звонок</p>
+        <label class="font-inter text-black text-grey-700 font-medium">Телефон&#65121;</label>
+        <input v-model="form.phone"  maxlength="12" minlength="12" required pattern="\+?[0-9\s\-\(\)]+" type="text" id="phone" placeholder="+7 (___) ___-__-__" class="w-full mb-5 rounded-md invalid:text-red-500">
+        <label  v-if="this.$store.state.isPhoneInvalid" class=" w-full text-teal-400 text-xs text-center" >Это обязательное поле.</label>
+        <label class="font-inter text-black text-grey-700 font-medium">Имя&#65121;</label>
+        <input v-model="form.name" required minlength="3" maxlength="12" id="name" type="text" placeholder="Иван Иванов" class="w-full mb-5 bg-grey-500 rounded-md  invalid:text-red-500 ">
+        <label  v-if="this.$store.state.isNameInvalid" class=" w-full text-teal-400 text-xs text-center" >Тебя правда так назвали? Это обязательное поле.</label>
+        <label class="font-inter text-black text-grey-700 font-medium">Email&#65121;</label>
+        <input v-model="form.email"  required type="email"  id="email" placeholder="you@example.com" class="w-full mb-5 rounded-md">
+        <label  v-if="this.$store.state.isEmailInvalid" class=" w-full text-teal-400 text-xs text-center" >Угадай что? Это обязательное поле.</label>
+        <label class="font-inter text-black text-grey-700 font-medium">Город&#65121;</label>
+        <select  @change="changeSelect" class="cursor-pointer mb-5 rounded-md font-inter text-black text-grey-700 font-medium">
+            <option id="1option" class="1option" ref="option1">{{$store.state.isMsc ? "Москва" : "Питер"}}</option>
             <option id="2option"  class="2option" ref="option2">{{$store.state.isMsc ? "Питер" : "Москва"}}</option>
         </select >
-        <input v-model="form.name" required minlength="3" maxlength="12" id="name" type="text" placeholder="Имя" class="w-1/2 bg-grey-500 rounded-md my-1.5 py-1.5 z-15 invalid:text-red-500 ">
-        <label  v-if="this.$store.state.isNameInvalid" class=" w-min-fit text-teal-400 text-xs text-center" >Тебя правда так назвали? Это обязательное поле.</label>
-        <input v-model="form.phone"  maxlength="12" minlength="12" required pattern="\+?[0-9\s\-\(\)]+" type="phone" id="phone" placeholder="+7 (___) ___-__-__" class="w-1/2 rounded-md my-1.5 py-1.5 z-15">
-        <label  v-if="this.$store.state.isPhoneInvalid" class=" w-min-fit text-teal-400 text-xs text-center" >Это обязательное поле.</label>
-        <input v-model="form.email"  required type="email"  id="email" placeholder="E-mail" class="w-1/2 rounded-md my-1.5 py-1.5 z-15">
-        <label  v-if="this.$store.state.isEmailInvalid" class=" w-min-fit text-teal-400 text-xs text-center" >Угадай что? Это обязательное поле.</label>
-        <button @click="validation"  class="inset-2/3 bg-slate-100 py-1.5 pm-1.5 rounded-md hover:bg-teal-400 focus:outline-none delay-75  top-0 right-0 cursor-pointer">Отправить</button>
+        <button @click="validation"  class="bg-green-600 text-white h-9 rounded-md   top-0 right-0 cursor-pointer">Отправить</button>
         
     
     </form>   
@@ -33,7 +37,7 @@
   </div>
 
 </div>
-</div>
+
 </template>
 
 <script >
