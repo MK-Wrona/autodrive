@@ -3,8 +3,13 @@ module.exports = {
     darkMode: false, 
   content: [],
   theme: {
-    extend: {},
-   
+    extend: {
+      width: {
+        'ipad': '669px',
+        'desktop': '804px',
+      }
+    },
+    
   },
   plugins: [
     require('@tailwindcss/forms'),

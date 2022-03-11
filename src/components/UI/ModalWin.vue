@@ -6,37 +6,42 @@
   </div>
 </div>
 
-<div class="fixed inset-0 bg-slate-500 opacity-75 flex flex-col items-center justify-center" v-if="show">
-  <div class="w-80   opacity-100 z-1 rounded-lg" >
-  
-
-<img :src="require(`./Group.svg`)" class=" absolute top-0 right-0" @click="hideModal">
-  
-  
-   <form @submit.prevent="makeOrder"  id="form" required  novalidate class="w-80 h-auto bg-white flex flex-col  rounded-lg opacity-100 px-6 py-6">
-        <p class="font-inter text-xl font-medium text-black mb-9 leading-6">Заказать звонок</p>
-        <label class="font-inter text-black text-grey-700 font-medium">Телефон&#65121;</label>
-        <input v-model="form.phone"  maxlength="12" minlength="12" required pattern="\+?[0-9\s\-\(\)]+" type="text" id="phone" placeholder="+7 (___) ___-__-__" class="w-full mb-5 rounded-md invalid:text-red-500">
+<div class="fixed inset-0 bg-slate-500/75 flex flex-col items-center justify-center " @click="hideModal" v-if="show">
+<div class="w-80 h-auto bg-white rounded-lg px-5 py-5 md:h-64 md:w-ipad xl:w-desktop ">
+  <p class="font-inter text-xl font-medium text-black mb-9 leading-6">Заказать звонок</p>
+   <form @submit.prevent="makeOrder"  id="form" required  novalidate >
+   <ul class="flex flex-col md:flex-row flex-wrap xl:justify-end
+   ">
+        <li class="font-inter text-black text-grey-700 font-medium left-0 flex flex-col md:mr-7 xl:mr-5">Телефон&#65121;
+        <input v-model="form.phone"  maxlength="12" minlength="12" required pattern="\+?[0-9\s\-\(\)]+" type="text" id="phone" placeholder="+7 (___) ___-__-__" class="w-full mb-5 rounded-md invalid:text-red-500 md:w-44">
         <label  v-if="this.$store.state.isPhoneInvalid" class=" w-full text-teal-400 text-xs text-center" >Это обязательное поле.</label>
-        <label class="font-inter text-black text-grey-700 font-medium">Имя&#65121;</label>
-        <input v-model="form.name" required minlength="3" maxlength="12" id="name" type="text" placeholder="Иван Иванов" class="w-full mb-5 bg-grey-500 rounded-md  invalid:text-red-500 ">
+        </li>
+        <li class="font-inter text-black text-grey-700 font-medium flex flex-col md:mr-7 xl:mr-5">Имя&#65121;
+        <input v-model="form.name" required minlength="3" maxlength="12" id="name" type="text" placeholder="Иван Иванов" class="w-full mb-5 bg-grey-500 rounded-md  invalid:text-red-500 md:w-44">
         <label  v-if="this.$store.state.isNameInvalid" class=" w-full text-teal-400 text-xs text-center" >Тебя правда так назвали? Это обязательное поле.</label>
-        <label class="font-inter text-black text-grey-700 font-medium">Email&#65121;</label>
-        <input v-model="form.email"  required type="email"  id="email" placeholder="you@example.com" class="w-full mb-5 rounded-md">
+        </li>
+        <li class="font-inter text-black text-grey-700 font-medium flex flex-col md:mr-7 xl:mr-5">Email&#65121;
+        <input v-model="form.email"  required type="email"  id="email" placeholder="you@example.com" class="w-full mb-5 rounded-md md:w-44 ">
         <label  v-if="this.$store.state.isEmailInvalid" class=" w-full text-teal-400 text-xs text-center" >Угадай что? Это обязательное поле.</label>
-        <label class="font-inter text-black text-grey-700 font-medium">Город&#65121;</label>
+        </li>
+        <li class="font-inter text-black text-grey-700 font-medium flex flex-col md:w-96 md:mr-7 xl:mr-0 xl:w-44">Город&#65121;
         <select  @change="changeSelect" class="cursor-pointer mb-5 rounded-md font-inter text-black text-grey-700 font-medium">
             <option id="1option" class="1option" ref="option1">{{$store.state.isMsc ? "Москва" : "Питер"}}</option>
             <option id="2option"  class="2option" ref="option2">{{$store.state.isMsc ? "Питер" : "Москва"}}</option>
         </select >
-        <button @click="validation"  class="bg-green-600 text-white h-9 rounded-md   top-0 right-0 cursor-pointer">Отправить</button>
+        </li>
+        <li class="font-inter text-black text-grey-700 font-medium flex flex-col ">
+        <button @click="validation"  class="bg-green-600  text-white h-10 rounded-md md:mt-6 cursor-pointer md:w-44">Отправить</button>
         
-    
-    </form>   
-    
-  </div>
+    </li>
+    </ul>
 
+    </form>   
 </div>
+  </div>
+  
+
+
 
 </template>
 

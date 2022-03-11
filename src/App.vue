@@ -1,12 +1,12 @@
 <template>
-<mymodal v-model:show="modalVisible">
-</mymodal>
   
-    <div class="bg-white  flex sm:flex-row flex-col items-center my-2.5 mx-2.5 sm:mt-5 sm:ml-10 md:ml-20   ">
+    <div class="bg-white  flex sm:flex-row flex-col items-center my-2.5 mx-2.5 sm:mt-5 sm:ml-10 md:ml-20">
     <modal-button @click="showModal(), setId(), $store.commit('setMsc')" id="1">Заказать в{{cities.id = 1 ? ' Москву':' Санкт-Петербург'}}</modal-button>
     <modal-button @click="showModal(), setId(), $store.commit('setSaint')" id="2">Заказать в{{cities.id = 2 ? ' Санкт-Петербург':' Москву'}}</modal-button>
   
   </div> 
+  <mymodal v-model:show="modalVisible">
+</mymodal>
   
 </template>
 <script>
