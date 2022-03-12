@@ -10,6 +10,7 @@ export default createStore({
     isEmailInvalid:false,
     isFormInvalid:false,
     isOpened: false,
+    
 
 
   },
@@ -43,7 +44,8 @@ export default createStore({
     },
     openResponse(state){
       state.isOpened = true
-    }
+    },
+    
   },
   actions: {
   },
